@@ -24,7 +24,6 @@ async function fetchGitHubData() {
   setState({ loading: true, error: "", showPortfolio: false });
 
   try {
-    // Fetch user data
     const userResponse = await fetch(
       `https://api.github.com/users/${state.username}`
     );
@@ -33,13 +32,11 @@ async function fetchGitHubData() {
     }
     const user = await userResponse.json();
 
-    // Fetch repositories
     const reposResponse = await fetch(
       `https://api.github.com/users/${state.username}/repos?sort=updated&per_page=6`
     );
     const reposData = await reposResponse.json();
 
-    // Try to fetch README from profile repo
     let readme = null;
     try {
       const readmeResponse = await fetch(
@@ -342,3 +339,6 @@ function render() {
     }
   }
 }
+
+// Initialize app
+render();
